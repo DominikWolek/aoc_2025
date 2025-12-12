@@ -2,23 +2,29 @@
 import sys
 
 
-def part_1(input):
-    result = 0
-    return result
+def part_1(regions):
+    return len(list(filter(does_fit, regions)))
 
 
-def part_2(input):
-    result = 0
-    return result
+def does_fit(region):
+    (size, ps) = region
+    return sum(ps) * 9 <= size[0] * size[1]
+
+
+def part_2():
+    return "Happy Holidays!"
 
 
 def get_input():
     input_path = "./" + sys.argv[1]
     file = open(input_path)
-    result = [line for line in file]
-    return result
+    lines = [line for line in file]
+    regions = list(map(lambda l: l.split(':'), lines[30:]))
+    regions = [(tuple(map(int, r[0].split('x'))), list(map(int, r[1].split())))
+               for r in regions]
+    return regions
 
 
-input = get_input()
-print("Part 1:", part_1(input))
-print("Part 2:", part_2(input))
+regions = get_input()
+print("Part 1:", part_1(regions))
+print("Part 2:", part_2())
